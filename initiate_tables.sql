@@ -181,7 +181,7 @@ create table employee_accounts(
 	username varchar(255),
 	salary money,
 	address varchar(255),
-	age tinyint check (age >= 18),
+	dob datetime2,
 	account_type varchar(100),
 	last_name varchar(255),
 	first_name varchar(255),
@@ -190,6 +190,7 @@ create table employee_accounts(
 	ssn varchar(9),
 	employee_type varchar(20),
 	store_id int,
+	status bit default 1,
 	constraint uq_username_employee_account unique (username),
 	constraint uq_employee_ssn unique (ssn)
 );
