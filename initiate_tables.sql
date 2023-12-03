@@ -124,7 +124,6 @@ create table shifts(
 create table accounts(
 	id int identity(1,1) primary key,
 	username varchar(255) not null,
-	phone_number varchar(10),
 	password varchar(255),
 	constraint uq_username unique (username)
 );

@@ -64,17 +64,17 @@ INSERT INTO items (item_name, description, instruction, base_price, category_id)
 INSERT INTO menus (menu_name, period, started_at) values ('Normal Menu', 0, convert(datetime, '01/01/2000', 103))
 
 -- 030_insert_into_accounts.sql
-INSERT INTO accounts (username, phone_number, password) values ('employee1', 0909090900, 'password1');
-INSERT INTO accounts (username, phone_number, password) values ('employee2', 0909090901, 'password2');
-INSERT INTO accounts (username, phone_number, password) values ('employee3', 0909090902, 'password3');
-INSERT INTO accounts (username, phone_number, password) values ('employee4', 0909090903, 'password4');
-INSERT INTO accounts (username, phone_number, password) values ('employee5', 0909090904, 'password5');
-INSERT INTO accounts (username, phone_number, password) values ('employee6', 0909090905, 'password6');
+INSERT INTO accounts (username, password) values ('employee1', 'password1');
+INSERT INTO accounts (username, password) values ('employee2', 'password2');
+INSERT INTO accounts (username, password) values ('employee3', 'password3');
+INSERT INTO accounts (username, password) values ('employee4', 'password4');
+INSERT INTO accounts (username, password) values ('employee5', 'password5');
+INSERT INTO accounts (username, password) values ('employee6', 'password6');
 
-INSERT INTO accounts (username, phone_number, password) values ('customer1', 0909090900, 'password1');
-INSERT INTO accounts (username, phone_number, password) values ('customer2', 0909090900, 'password2');
-INSERT INTO accounts (username, phone_number, password) values ('customer3', 0909090900, 'password3');
-INSERT INTO accounts (username, phone_number, password) values ('customer4', 0909090900, 'password4');
+INSERT INTO accounts (username, password) values ('customer1', 'password1');
+INSERT INTO accounts (username, password) values ('customer2', 'password2');
+INSERT INTO accounts (username, password) values ('customer3', 'password3');
+INSERT INTO accounts (username, password) values ('customer4', 'password4');
 
 -- 031_insert_into_memberships.sql
 INSERT INTO memberships (description, membership_type, discount_percent) values ('...', 'BRONZE', 5);
