@@ -123,21 +123,21 @@ INSERT INTO vouchers (description, voucher_name, started_at, status, promotional
 
 -- 037_insert_orders.sql
 -- user_1
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 20000, 20000, '11-10-2023');
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (50000, 0, 5000, '11-15-2023');
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (90000, 0, 9000, '11-16-2023');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 20000, 20000, '11-10-2023 07:00');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (50000, 0, 5000, '11-15-2023 08:00');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (90000, 0, 9000, '11-16-2023 09:00');
 
 -- user_2
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (500000, 20000, 125000, '11-17-2023');
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 20000, 50000, '11-18-2023');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (500000, 20000, 125000, '11-17-2023 10:00');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 20000, 50000, '11-18-2023 11:00');
 
 -- user_3
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (300000, 0, 30000, '11-09-2023');
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 0, 20000, '11-10-2023');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (300000, 0, 30000, '11-09-2023 12:00');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 0, 20000, '11-10-2023 13:00');
 
 -- user_4
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (300000, 0, 30000, '11-08-2023');
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 0, 20000, '11-10-2023');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (300000, 0, 30000, '11-08-2023 14:00');
+INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (200000, 0, 20000, '11-10-2023 17:00');
 
 -- 038_insert_online_orders.sql
 INSERT INTO online_orders 	(order_id, status, shipping_fee, shipping_address, predicted_arrived_time, customer_account_username, export_employee_username, shipping_employee_username, discount_amount_by_point)
@@ -203,4 +203,72 @@ INSERT INTO order_items (order_id, item_id, actual_price, quantity)
 INSERT INTO order_items (order_id, item_id, actual_price, quantity)
 				VALUES		(9, 2, 50000, 2);
 
+
+-- Mockup data for procedure 2 that return top employees in sales
+-- Mock-up data for Months table
+INSERT INTO Months (month, year) VALUES
+	(1, 2023), (2, 2023), (3, 2023), (4, 2023),
+	(5, 2023), (6, 2023), (7, 2023), (8, 2023),
+	(9, 2023), (10, 2023), (11, 2023), (12, 2023);
+
+-- Mock-up data for Shifts table
+INSERT INTO shifts ("month", "year", started_at, ended_at, "day") VALUES
+    (11, 2023, '05:00:00', '11:00:00', 8),
+    (11, 2023, '11:00:00', '17:00:00', 8),
+    (11, 2023, '17:00:00', '23:00:00', 8),
+	(11, 2023, '05:00:00', '11:00:00', 9),
+    (11, 2023, '11:00:00', '17:00:00', 9),
+    (11, 2023, '17:00:00', '23:00:00', 9),
+	(11, 2023, '05:00:00', '11:00:00', 10),
+    (11, 2023, '11:00:00', '17:00:00', 10),
+    (11, 2023, '17:00:00', '23:00:00', 10),
+	(11, 2023, '05:00:00', '11:00:00', 15),
+    (11, 2023, '11:00:00', '17:00:00', 15),
+    (11, 2023, '17:00:00', '23:00:00', 15),
+	(11, 2023, '05:00:00', '11:00:00', 16),
+    (11, 2023, '11:00:00', '17:00:00', 16),
+    (11, 2023, '17:00:00', '23:00:00', 16),
+	(11, 2023, '05:00:00', '11:00:00', 17),
+    (11, 2023, '11:00:00', '17:00:00', 17),
+    (11, 2023, '17:00:00', '23:00:00', 17),
+	(11, 2023, '05:00:00', '11:00:00', 18),
+    (11, 2023, '11:00:00', '17:00:00', 18),
+    (11, 2023, '17:00:00', '23:00:00', 18);
+
+INSERT INTO employee_shifts (username, shift_id, "month", "year") VALUES
+    -- 08/11
+	('employee1', 1, 11, 2023), ('employee2', 1, 11, 2023), 
+	('employee3', 2, 11, 2023), ('employee4', 2, 11, 2023),
+	('employee5', 3, 11, 2023), ('employee6', 3, 11, 2023),
+
+	-- 09/11
+	('employee1', 4, 11, 2023), ('employee2', 4, 11, 2023), 
+	('employee3', 5, 11, 2023), ('employee4', 5, 11, 2023),
+	('employee5', 6, 11, 2023), ('employee6', 6, 11, 2023),
+
+	-- 10/11
+	('employee1', 7, 11, 2023), ('employee2', 7, 11, 2023), 
+	('employee3', 8, 11, 2023), ('employee4', 8, 11, 2023),
+	('employee5', 9, 11, 2023), ('employee6', 9, 11, 2023),
+
+	-- 15/11
+	('employee1', 10, 11, 2023), ('employee2', 10, 11, 2023), 
+	('employee3', 11, 11, 2023), ('employee4', 11, 11, 2023),
+	('employee5', 12, 11, 2023), ('employee6', 12, 11, 2023),
+
+	-- 16/11
+	('employee1', 13, 11, 2023), ('employee2', 13, 11, 2023), 
+	('employee3', 14, 11, 2023), ('employee4', 14, 11, 2023),
+	('employee5', 15, 11, 2023), ('employee6', 15, 11, 2023),
+
+	-- 17/11
+	('employee1', 16, 11, 2023), ('employee2', 16, 11, 2023), 
+	('employee3', 17, 11, 2023), ('employee4', 17, 11, 2023),
+	('employee5', 18, 11, 2023), ('employee6', 18, 11, 2023),
+
+	-- 18/11
+	('employee1', 19, 11, 2023), ('employee2', 19, 11, 2023), 
+	('employee3', 20, 11, 2023), ('employee4', 20, 11, 2023),
+	('employee5', 21, 11, 2023), ('employee6', 21, 11, 2023)
+    ;
 
