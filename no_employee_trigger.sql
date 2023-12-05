@@ -42,4 +42,3 @@ UPDATE employee_accounts
 SET status = 1
 WHERE username = 'employee8'
 
-
