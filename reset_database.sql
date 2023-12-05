@@ -26,3 +26,5 @@ drop table if exists item_has_ingredients;
 drop table if exists items;
 drop table if exists categories;
 drop table if exists ingredients;
+
+DROP PROCEDURE IF EXISTS GetCustomersWithLargestTotalAmount;
