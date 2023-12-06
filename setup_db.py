@@ -9,15 +9,15 @@ conn = pyodbc.connect(connectionString, autocommit=True)
 
 cursor = conn.cursor()
 
-with open("reset_database.sql", "r") as f:
+with open("./base_db/reset_database.sql", "r") as f:
     SQL_QUERY = f.read()
     cursor.execute(SQL_QUERY)
 
-with open("initiate_tables.sql", "r") as f:
+with open("./base_db/initiate_tables.sql", "r") as f:
     SQL_QUERY = f.read()
     cursor.execute(SQL_QUERY)
 
-with open("mock_data.sql", "r") as f:
+with open("./base_db/mock_data.sql", "r") as f:
     SQL_QUERY = f.read()
     cursor.execute(SQL_QUERY)
 
@@ -68,5 +68,3 @@ with open("./1.2.4/func_best_sellers.sql", "r") as f:
 with open("./1.2.4/func_store_revenue.sql", "r") as f:
     SQL_QUERY = f.read()
     cursor.execute(SQL_QUERY)
-
-
