@@ -63,16 +63,16 @@ BEGIN
     END
 END;
 
--- Test trigger
-INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 30000, 150000, 30); --voucher_id: 2
-INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 50000, 150000, 30);
-INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 100000, 200000, 30);
-INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 180000, 400000, 30); --voucher_id: 5
+-- -- Test trigger
+-- INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 30000, 150000, 30); --voucher_id: 2
+-- INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 50000, 150000, 30);
+-- INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 100000, 200000, 30);
+-- INSERT INTO vouchers (description, voucher_name, started_at, status, promotional_amount, total_applied_amount, period) values ('...', 'Monthly voucher', '12-01-2023', 1, 180000, 400000, 30); --voucher_id: 5
 
-INSERT INTO order_vouchers (order_id, voucher_id) values (12, 2); --30k / 150k
-INSERT INTO order_vouchers (order_id, voucher_id) values (13, 3); --50k / 150k
-INSERT INTO order_vouchers (order_id, voucher_id) values (13, 4); --100k / 200k
-INSERT INTO order_vouchers (order_id, voucher_id) values (12, 5); --180k / 400k
---Why we cannot apply multiple vouchers for a single order?? Bruh
+-- INSERT INTO order_vouchers (order_id, voucher_id) values (12, 2); --30k / 150k
+-- INSERT INTO order_vouchers (order_id, voucher_id) values (13, 3); --50k / 150k
+-- INSERT INTO order_vouchers (order_id, voucher_id) values (13, 4); --100k / 200k
+-- INSERT INTO order_vouchers (order_id, voucher_id) values (12, 5); --180k / 400k
+-- --Why we cannot apply multiple vouchers for a single order?? Bruh
 
-DELETE FROM order_vouchers WHERE order_id = 13 AND voucher_id = 3
+-- DELETE FROM order_vouchers WHERE order_id = 13 AND voucher_id = 3

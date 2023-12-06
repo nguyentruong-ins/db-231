@@ -28,19 +28,19 @@ BEGIN
     END
 END;
 
---Test trigger
---Order
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (0, 0, 0, '11-10-2023');
-INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (0, 0, 0, '11-15-2023');
+-- --Test trigger
+-- --Order
+-- INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (0, 0, 0, '11-10-2023');
+-- INSERT INTO orders (total_amount, discount_amount_by_voucher, discount_amount_by_membership, ordered_at) values (0, 0, 0, '11-15-2023');
 
 
-INSERT INTO order_items (order_id, item_id, actual_price, quantity)
-				VALUES		(10, 2, 50000, 4);
-INSERT INTO order_items (order_id, item_id, actual_price, quantity)
-				VALUES		(10, 25, 50000, 1);
-INSERT INTO order_items (order_id, item_id, actual_price, quantity)
-				VALUES		(11, 18, 45000, 1);
-INSERT INTO order_items (order_id, item_id, actual_price, quantity)
-				VALUES		(11, 19, 45000, 2);
+-- INSERT INTO order_items (order_id, item_id, actual_price, quantity)
+-- 				VALUES		(10, 2, 50000, 4);
+-- INSERT INTO order_items (order_id, item_id, actual_price, quantity)
+-- 				VALUES		(10, 25, 50000, 1);
+-- INSERT INTO order_items (order_id, item_id, actual_price, quantity)
+-- 				VALUES		(11, 18, 45000, 1);
+-- INSERT INTO order_items (order_id, item_id, actual_price, quantity)
+-- 				VALUES		(11, 19, 45000, 2);
 
-DELETE FROM order_items WHERE order_id = 10 AND item_id = 2
+-- DELETE FROM order_items WHERE order_id = 10 AND item_id = 2

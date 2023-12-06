@@ -1,6 +1,5 @@
 -- Get Total Revenue in 1 Store in a period of time --
-
-ALTER FUNCTION dbo.GetTotalRevenue(
+CREATE OR ALTER FUNCTION dbo.GetTotalRevenue(
     @storeID INT,
     @startDate DATE,
     @endDate DATE
@@ -47,8 +46,8 @@ END;
 
 ------------- TEST SQL ---------------
 
-DECLARE @result MONEY;
-SET @result = dbo.GetTotalRevenue(2, '2023-11-08', '2023-11-11');
-SELECT @result AS TotalRevenue;
+-- DECLARE @result MONEY;
+-- SET @result = dbo.GetTotalRevenue(2, '2023-11-08', '2023-11-11');
+-- SELECT @result AS TotalRevenue;
 
 ------------------------------------------------------------------------------

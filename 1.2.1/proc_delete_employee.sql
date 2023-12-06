@@ -20,6 +20,6 @@ END
 
 -- TEST SQL -- 
 
-EXEC RemoveEmployeeAccount 'nguyen.truong5';
+-- EXEC RemoveEmployeeAccount 'nguyen.truong5';
 
 ------------------------------------------------

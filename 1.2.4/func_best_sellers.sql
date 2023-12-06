@@ -1,7 +1,5 @@
 -- Get best seller online and best seller at table in a period of time -- 
-
-
-ALTER FUNCTION GetBestSellers(
+CREATE OR ALTER FUNCTION GetBestSellers(
     @start_date datetime2,
     @end_date datetime2
 )
@@ -48,4 +46,4 @@ END;
 
 ------------- TEST SQL ---------------
 
-SELECT * FROM GetBestSellers('2023-11-08', '2023-11-11');
+-- SELECT * FROM GetBestSellers('2023-11-08', '2023-11-11');

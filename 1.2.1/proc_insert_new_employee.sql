@@ -104,20 +104,20 @@ END
 
 -- TEST SQL ---
 
-EXEC InsertNewEmployeeAccount 
-@username = 'nguyen.truong1', 
-@password = '123456',
-@salary = 10000000,
-@dob = '2002/10/11',
-@employee_type = 'FULLTIME',
-@account_type = 'EMPLOYEE',
-@number = '0945430551',
-@first_name = 'Nguyen',
-@last_name = 'Truong',
-@sex = 'MALE',
-@started_date = '2020/11/20',
-@ssn = '0870002',
-@address = 'Dorm A',
-@store_id = 1;
+-- EXEC InsertNewEmployeeAccount 
+-- @username = 'nguyen.truong1', 
+-- @password = '123456',
+-- @salary = 10000000,
+-- @dob = '2002/10/11',
+-- @employee_type = 'FULLTIME',
+-- @account_type = 'EMPLOYEE',
+-- @number = '0945430551',
+-- @first_name = 'Nguyen',
+-- @last_name = 'Truong',
+-- @sex = 'MALE',
+-- @started_date = '2020/11/20',
+-- @ssn = '0870002',
+-- @address = 'Dorm A',
+-- @store_id = 1;
 
 ------------------------------------------------

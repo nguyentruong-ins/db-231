@@ -140,21 +140,21 @@ END
 
 -- TEST SQL --
 
-EXEC UpdateEmployeeAccount
-@username = 'nguyen.truong', 
-@new_password = '1234569999',
-@new_salary = 1999999,
-@new_dob = '2003/11/12',
-@new_employee_type = 'FULLTIME',
-@new_account_type = 'EMPLOYEE',
-@old_number = '0945430559',
-@new_number = '0945430444',
-@new_first_name = 'Nguyen',
-@new_last_name = 'Truong',
-@new_sex = 'MALE',
-@new_started_date = '2020/11/20',
-@new_ssn = '0870003',
-@new_address = 'Dorm A',
-@new_store_id = 1;
+-- EXEC UpdateEmployeeAccount
+-- @username = 'nguyen.truong', 
+-- @new_password = '1234569999',
+-- @new_salary = 1999999,
+-- @new_dob = '2003/11/12',
+-- @new_employee_type = 'FULLTIME',
+-- @new_account_type = 'EMPLOYEE',
+-- @old_number = '0945430559',
+-- @new_number = '0945430444',
+-- @new_first_name = 'Nguyen',
+-- @new_last_name = 'Truong',
+-- @new_sex = 'MALE',
+-- @new_started_date = '2020/11/20',
+-- @new_ssn = '0870003',
+-- @new_address = 'Dorm A',
+-- @new_store_id = 1;
 
 ------------------------------------------------

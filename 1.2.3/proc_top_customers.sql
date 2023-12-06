@@ -1,4 +1,4 @@
-CREATE PROCEDURE GetTopCustomersWithLargestOrders
+CREATE OR ALTER PROCEDURE GetTopCustomersWithLargestOrders
     @startDate DATETIME2,
     @endDate DATETIME2,
     @numberOfCustomers INT
@@ -29,4 +29,4 @@ BEGIN
     FROM OrderedCustomers;
 END;
 
-EXEC GetTopCustomersWithLargestOrders '2023-01-01', '2023-12-31', 10;
+-- EXEC GetTopCustomersWithLargestOrders '2023-01-01', '2023-12-31', 10;

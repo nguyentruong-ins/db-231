@@ -1,4 +1,4 @@
-CREATE PROCEDURE GetTopSellingEmployees
+CREATE OR ALTER PROCEDURE GetTopSellingEmployees
     @startDate DATETIME2,
     @endDate DATETIME2,
     @numberOfEmployees INT
@@ -34,4 +34,4 @@ BEGIN
     FROM OrderedEmployees;
 END;
 
-EXEC GetTopSellingEmployees '2023-01-01', '2023-12-31', 10;
+-- EXEC GetTopSellingEmployees '2023-01-01', '2023-12-31', 10;

@@ -3,8 +3,9 @@ drop table if exists directly_orders;
 drop table if exists employee_numbers;
 drop table if exists employee_shifts;
 	
-alter table employee_accounts
-drop constraint fk_store_id;
+if object_id('dbo.employee_accounts', 'u') is not null
+    alter table employee_accounts
+    drop constraint fk_store_id;
 
 drop table if exists stores;
 drop table if exists employee_accounts;
