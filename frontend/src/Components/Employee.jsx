@@ -28,6 +28,8 @@ const Employee = () => {
   // }, []);
 
   const handleDelete = (id) => {
+    const shouldDelete = window.confirm('Are you sure you want to delete this component permanently?');
+    if (!shouldDelete) return;
     axios.delete('http://localhost:3000/auth/delete_employee/' + id)
       .then(result => {
         if (result.data.Status) {

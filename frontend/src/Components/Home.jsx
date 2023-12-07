@@ -8,8 +8,9 @@ const Home = () => {
   const [top, setTop] = useState(10);
 
   const now = new Date();
-  const currDate = (new Date(now.getTime() + 7 * 60 * 60 * 1000)).toISOString().slice(0, 16);
-  const prevDate = (new Date(now.getTime() + 7 * 60 * 60 * 1000 - 30 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 16);
+  const currDate = (new Date(now.getTime())).toISOString().slice(0, 10);
+  const prevDate = (new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10);
+
   const [fromDate, setFromDate] = useState(prevDate);
   const [toDate, setToDate] = useState(currDate);
 
@@ -35,6 +36,11 @@ const Home = () => {
       .catch(err => console.log(err))
   }, [])
 
+  console.log({
+    from_date: fromDate,
+    to_date: toDate,
+    top: top,
+  });
 
   // useEffect(() => {
   //   customerCount();
@@ -119,7 +125,7 @@ const Home = () => {
             <h6 className='m-0'>From</h6>
           </label>
           <input
-            type="datetime-local"
+            type="date"
             className="form-control rounded-0"
             id="fromDate"
             value={fromDate}
@@ -131,7 +137,7 @@ const Home = () => {
             <h6 className='m-0'>To</h6>
           </label>
           <input
-            type="datetime-local"
+            type="date"
             className="form-control rounded-0"
             id="toDate"
             value={toDate}
