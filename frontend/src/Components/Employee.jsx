@@ -46,7 +46,7 @@ const Employee = () => {
         Add Employee
       </Link>
       <div className="mt-3">
-        <table className="table">
+        <table className="table striped-table">
           <thead>
             <tr>
               <th>Username</th>
