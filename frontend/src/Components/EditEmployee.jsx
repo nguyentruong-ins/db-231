@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { convertDatetimeData2Input, convertDatetimeInput2Data } from '../utils'
+import { convertDataToInput, convertInputToData } from '../utils'
 
 const EditEmployee = () => {
   const { id } = useParams()
@@ -21,28 +21,40 @@ const EditEmployee = () => {
     store_id: 0,
     status: 0
   });
+
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('/sample_data/employee_accounts.json')
       .then(result => {
-        setEmployee(
-          result.data["SELECT * FROM employee_accounts;\n"][id]
-        );
+        const employeeData = result.data["SELECT * FROM employee_accounts;\n"][id];
+        setEmployee({
+          ...employeeData,
+          started_date: convertDataToInput(employeeData.started_date),
+          dob: convertDataToInput(employeeData.dob),
+        });
       })
       .catch(err => console.log(err))
   }, [])
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    axios.put('http://localhost:3000/auth/edit_employee/' + id, employee)
-      .then(result => {
-        if (result.data.Status) {
-          navigate('/dashboard/employee')
-        } else {
-          alert(result.data.Error)
-        }
-      }).catch(err => console.log(err))
+    e.preventDefault();
+    const formData = {
+      ...employee,
+      started_date: convertInputToData(employee.started_date),
+      dob: convertInputToData(employee.dob),
+    }
+
+    console.log(formData);
+    // axios.put('http://localhost:3000/auth/edit_employee/' + id, formData)
+    //   .then(result => {
+    //     if (result.data.Status) {
+    //       navigate('/dashboard/employee')
+    //     } else {
+    //       alert(result.data.Error)
+    //     }
+    //   }).catch(err => console.log(err))
   }
 
   return (
@@ -50,6 +62,23 @@ const EditEmployee = () => {
       <div className="p-3 rounded w-75 border">
         <h3 className="text-center">Edit Employee</h3>
         <form onSubmit={handleSubmit} className="row g-1">
+          <div className="col-12 d-flex justify-content-end px-2">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="flexSwitchCheckChecked">Active account</label>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                checked={employee.status}
+                onChange={(e) => {
+                  setEmployee({ ...employee, status: !employee.status })
+                }
+
+                }
+              />
+            </div>
+          </div>
           <div className="col-6 p-2">
             <label for="inputName" className="form-label">
               Username
@@ -93,13 +122,13 @@ const EditEmployee = () => {
               Date of birth
             </label>
             <input
-              type="datetime-local"
+              type="date"
               className="form-control rounded-0"
               id="inputDob"
-              value={convertDatetimeData2Input(employee.dob)}
+              value={employee.dob}
               autoComplete="off"
               onChange={(e) =>
-                setEmployee({ ...employee, dob: convertDatetimeInput2Data(e.target.value) })
+                setEmployee({ ...employee, dob: e.target.value })
               }
             />
             <label for="account_type" className="form-label">
@@ -141,7 +170,7 @@ const EditEmployee = () => {
               id="inputFName"
               value={employee.first_name}
               onChange={(e) =>
-                setEmployee({ ...employee, first_name: e.target.value })
+                setEmployee({ ...employee, last_name: e.target.value })
               }
             />
             <label for="inputLName" className="form-label">
@@ -174,13 +203,13 @@ const EditEmployee = () => {
               Start date
             </label>
             <input
-              type="datetime-local"
+              type="date"
               className="form-control rounded-0"
               id="startDate"
-              value={convertDatetimeData2Input(employee.started_date)}
+              value={(employee.started_date)}
               autoComplete="off"
               onChange={(e) =>
-                setEmployee({ ...employee, started_date: convertDatetimeInput2Data(e.target.value) })
+                setEmployee({ ...employee, started_date: e.target.value })
               }
             />
             <label for="inputSSN" className="form-label">
@@ -212,7 +241,10 @@ const EditEmployee = () => {
             </select>
           </div>
 
-          <div className="col-12 mt-3 d-flex justify-content-center">
+          <div className="col-12 d-flex align-items-center justify-content-center flex-column gap-3">
+            <div className='text-danger'>
+              {error && error}
+            </div>
             <button type="submit" className="btn btn-primary w-50">
               Edit Employee
             </button>

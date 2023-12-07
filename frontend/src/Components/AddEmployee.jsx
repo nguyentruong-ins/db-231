@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { convertInputToData } from "../utils";
 
 const AddEmployee = () => {
   const [employee, setEmployee] = useState({
@@ -19,48 +20,38 @@ const AddEmployee = () => {
     store_id: 0,
     status: 0
   });
-  const [category, setCategory] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/auth/category")
-  //     .then((result) => {
-  //       if (result.data.Status) {
-  //         setCategory(result.data.Result);
-  //       } else {
-  //         alert(result.data.Error);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const formData = new FormData();
+    const formData = {
+      username: employee.username,
+      salary: employee.salary,
+      address: employee.address,
+      dob: convertInputToData(employee.dob),
+      account_type: employee.account_type,
+      last_name: employee.last_name,
+      first_name: employee.first_name,
+      sex: employee.sex,
+      started_date: convertInputToData(employee.started_date),
+      ssn: employee.ssn,
+      employee_type: employee.employee_type,
+      store_id: employee.store_id,
+    };
 
-    formData.append('username', employee.username);
-    formData.append('salary', employee.salary);
-    formData.append('address', employee.address);
-    formData.append('dob', employee.dob);
-    formData.append('account_type', employee.account_type);
-    formData.append('last_name', employee.last_name);
-    formData.append('first_name', employee.first_name);
-    formData.append('sex', employee.sex);
-    formData.append('started_date', employee.started_date);
-    formData.append('ssn', employee.ssn);
-    formData.append('employee_type', employee.employee_type);
-    formData.append('store_id', employee.store_id);
+    console.log(formData);
 
-    axios.post('http://localhost:3000/auth/add_employee', formData)
-      .then(result => {
-        if (result.data.Status) {
-          navigate('/dashboard/employee')
-        } else {
-          alert(result.data.Error)
-        }
-      })
-      .catch(err => console.log(err))
-  }
+    // axios.post('http://localhost:3000/auth/add_employee', formData)
+    //   .then(result => {
+    //     if (result.data.Status) {
+    //       navigate('/dashboard/employee')
+    //     } else {
+    //       alert(result.data.Error)
+    //     }
+    //   })
+    //   .catch(err => console.log(err))
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
@@ -110,7 +101,7 @@ const AddEmployee = () => {
               Date of birth
             </label>
             <input
-              type="datetime-local"
+              type="date"
               className="form-control rounded-0"
               id="inputDob"
               placeholder="Enter Date of birth"
@@ -130,18 +121,16 @@ const AddEmployee = () => {
               <option value="MANAGER">MANAGER</option>
               <option value="EMPLOYEE">EMPLOYEE</option>
             </select>
-            <label for="inputStore" className="form-label">
-              Store Id
+            <label for="e_type" className="form-label">
+              Employee type
             </label>
-            <input
-              type="number"
-              className="form-control rounded-0"
-              id="inputStore"
-              placeholder="Enter Store Id"
-              onChange={(e) =>
-                setEmployee({ ...employee, store_id: e.target.value })
-              }
-            />
+            <select name="employee_type" id="e_type" className="form-select"
+              onChange={(e) => setEmployee({ ...employee, employee_type: e.target.value })}
+            >
+              <option value="">Select ...</option>
+              <option value="PARTTIME">PARTTIME</option>
+              <option value="FULLTIME">FULLTIME</option>
+            </select>
           </div>
 
           <div className="col-6 p-2">
@@ -178,12 +167,13 @@ const AddEmployee = () => {
               <option value="">Select ...</option>
               <option value="MALE">MALE</option>
               <option value="FEMALE">FEMALE</option>
+              <option value="OTHER">OTHER</option>
             </select>
             <label for="startDate" className="form-label">
               Start date
             </label>
             <input
-              type="datetime-local"
+              type="date"
               className="form-control rounded-0"
               id="startDate"
               autoComplete="off"
@@ -203,31 +193,23 @@ const AddEmployee = () => {
                 setEmployee({ ...employee, ssn: e.target.value })
               }
             />
-            <label for="e_type" className="form-label">
-              Type
-            </label>
-            <select name="employee_type" id="e_type" className="form-select"
-              onChange={(e) => setEmployee({ ...employee, employee_type: e.target.value })}
-            >
-              <option value="">Select ...</option>
-              <option value="PARTTIME">Part time</option>
-              <option value="FULLTIME">Full time</option>
-            </select>
-          </div>
-
-          {/* <div className="col-12 mb-3">
-            <label className="form-label" for="inputGroupFile01">
-              Select Image
+            <label for="inputStore" className="form-label">
+              Store Id
             </label>
             <input
-              type="file"
+              type="number"
               className="form-control rounded-0"
-              id="inputGroupFile01"
-              name="image"
-              onChange={(e) => setEmployee({ ...employee, image: e.target.files[0] })}
+              id="inputStore"
+              placeholder="Enter Store Id"
+              onChange={(e) =>
+                setEmployee({ ...employee, store_id: e.target.value })
+              }
             />
-          </div> */}
-          <div className="col-12 mt-3 d-flex justify-content-center">
+          </div>
+          <div className="col-12 d-flex align-items-center justify-content-center flex-column gap-3">
+            <div className='text-danger'>
+              {error && error}
+            </div>
             <button type="submit" className="btn btn-success w-50">
               Add Employee
             </button>
