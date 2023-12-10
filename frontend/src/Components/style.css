@@ -110,3 +110,7 @@ ul li :hover {
     margin-left: 0.25rem;
     font-weight: normal;
 }
+
+.striped-table tbody tr:nth-child(odd) td {
+    background-color: #f2f2f2 !important;
+}
