@@ -1,22 +1,34 @@
 function convertInputToData(dateInputValue) {
-    const date = new Date(dateInputValue);
-    const sqlDateTime = date.toISOString().replace('Z', '');
+    try {
+        const date = new Date(dateInputValue);
+        const sqlDateTime = date.toISOString().replace('Z', '');
 
-    return sqlDateTime;
+        return sqlDateTime;
+    } catch (error) {
+        return null;
+    }
 }
 
 function convertDataToInput(sqlDateTime) {
-    const date = new Date(sqlDateTime);
-    const dateInputValue = date.toISOString().split('T')[0];
+    try {
+        const date = new Date(sqlDateTime);
+        const dateInputValue = date.toISOString().split('T')[0];
 
-    return dateInputValue;
+        return dateInputValue;
+    } catch (error) {
+        return null;
+    }
 }
 
 function convertDataToTime(sqlDateTime) {
-    const date = new Date(sqlDateTime);
-    const timeInputValue = date.toISOString().split('T')[1].slice(0, 5);
+    try {
+        const date = new Date(sqlDateTime);
+        const timeInputValue = date.toISOString().split('T')[1].slice(0, 5);
 
-    return timeInputValue;
+        return timeInputValue;
+    } catch (error) {
+        return null;
+    }
 }
 
 export {

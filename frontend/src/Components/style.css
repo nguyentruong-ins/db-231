@@ -114,3 +114,15 @@ ul li :hover {
 .striped-table tbody tr:nth-child(odd) td {
     background-color: #f2f2f2 !important;
 }
+
+.modal-content {
+    /* position: absolute; */
+    top: 40%;
+    left: 50%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 10px;
+    padding: 2rem;
+}

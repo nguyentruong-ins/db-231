@@ -81,20 +81,22 @@ const Employee = () => {
                   <td>{convertDataToInput(e.started_date)}</td>
                   <td>{e.status ? "ACTIVE" : "INACTIVE"}</td>
                   <td>
-                    <Link
-                      to={`/dashboard/edit_employee/` + e.username}
-                      className="btn btn-primary btn-sm me-2"
-                    >
-                      Edit
-                    </Link>
+
                     {e.status && (
-                      <button
-                        className={`btn ${!e.status ? 'btn-success' : 'btn-danger'} btn-sm`}
-                        // style={{ width: '80px' }}
-                        onClick={() => handleDelete(e.username)}
-                      >
-                        {e.status ? "Inactive" : "Active"}
-                      </button>
+                      <>
+                        <Link
+                          to={`/dashboard/edit_employee/` + e.username}
+                          className="btn btn-primary btn-sm me-2"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          className={`btn ${!e.status ? 'btn-success' : 'btn-danger'} btn-sm`}
+                          onClick={() => handleDelete(e.username)}
+                        >
+                          {e.status ? "Inactive" : "Active"}
+                        </button>
+                      </>
                     )}
                   </td>
                 </tr>
