@@ -12,7 +12,15 @@ function convertDataToInput(sqlDateTime) {
     return dateInputValue;
 }
 
+function convertDataToTime(sqlDateTime) {
+    const date = new Date(sqlDateTime);
+    const timeInputValue = date.toISOString().split('T')[1].slice(0, 5);
+
+    return timeInputValue;
+}
+
 export {
     convertInputToData,
-    convertDataToInput
+    convertDataToInput,
+    convertDataToTime
 };

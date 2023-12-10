@@ -17,7 +17,7 @@ const EmployeeLogin = () => {
             .then(result => {
                 if (result.data.loginStatus) {
                     localStorage.setItem("valid", true)
-                    navigate('/employee_detail/' + result.data.id)
+                    navigate('/employee_detail/' + result.data.username)
                 } else {
                     setError(result.data.Error)
                 }

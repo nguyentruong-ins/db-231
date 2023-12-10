@@ -1,43 +1,50 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { convertDataToInput } from "../utils";
 
 const Employee = () => {
   const [employee, setEmployee] = useState([]);
-  const navigate = useNavigate();
+  // useEffect(() => {
+  //   axios.get('/sample_data/employee_accounts.json')
+  //     .then(result => {
+  //       setEmployee(result.data["SELECT * FROM employee_accounts;\n"]);
+  //     })
+  //     .catch(err => console.log(err))
+  // }, [])
+
 
   useEffect(() => {
-    axios.get('/sample_data/employee_accounts.json')
-      .then(result => {
-        setEmployee(result.data["SELECT * FROM employee_accounts;\n"]);
-      })
-      .catch(err => console.log(err))
-  }, [])
+    async function fetchEmployees() {
+      await axios
+        .get("http://localhost:4000/api/admin/employees")
+        .then((result) => {
+          if (result.data.statusCode === 200) {
+            console.log(result.data.message);
+            setEmployee(result.data.message);
+            // sessionStorage.setItem("employees", JSON.parse(result.data.message));
+          } else {
+            alert(result.data.message);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/auth/employee")
-  //     .then((result) => {
-  //       if (result.data.Status) {
-  //         setEmployee(result.data.Result);
-  //       } else {
-  //         alert(result.data.Error);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+    fetchEmployees();
+  }, []);
 
-  const handleDelete = (id) => {
-    const shouldDelete = window.confirm('Are you sure you want to delete this component permanently?');
-    if (!shouldDelete) return;
-    axios.delete('http://localhost:3000/auth/delete_employee/' + id)
+  const handleDelete = async (username) => {
+    const shouldDelete = window.confirm('Are you sure to change status of this employee?');
+    await axios
+      .post('http://localhost:4000/api/admin/delete-employee', { username })
       .then(result => {
-        if (result.data.Status) {
-          window.location.reload()
+        if (result.data.statusCode === 200) {
+          window.location.reload();
         } else {
-          alert(result.data.Error)
+          alert(result.data.message);
         }
       })
+      .catch((err) => console.log(err));
   }
   return (
     <div className="px-5 mt-3">
@@ -52,40 +59,47 @@ const Employee = () => {
           <thead>
             <tr>
               <th>Username</th>
-              <th>Start date</th>
+              <th>Full name</th>
               <th>Salary</th>
-              <th>Type</th>
-              <th>Store</th>
               <th>Account type</th>
+              <th>Employee Type</th>
+              <th>Store id</th>
+              <th>Start date</th>
               <th>Account status</th>
             </tr>
           </thead>
           <tbody>
-            {employee.map((e) => (
-              <tr>
-                <td>{e.username}</td>
-                <td>{e.started_date}</td>
-                <td>{e.salary}</td>
-                <td>{e.employee_type}</td>
-                <td>{e.store_id}</td>
-                <td>{e.account_type}</td>
-                <td>{e.status ? "Active" : "Inactive"}</td>
-                <td>
-                  <Link
-                    to={`/dashboard/edit_employee/` + e.id}
-                    className="btn btn-info btn-sm me-2"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    className="btn btn-warning btn-sm"
-                    onClick={() => handleDelete(e.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {employee.map((e) => {
+              return (
+                <tr key={e.id}>
+                  <td>{e.username}</td>
+                  <td>{e.first_name + " " + e.last_name}</td>
+                  <td>{parseInt(e.salary)}</td>
+                  <td>{e.account_type}</td>
+                  <td>{e.employee_type}</td>
+                  <td>{e.store_id}</td>
+                  <td>{convertDataToInput(e.started_date)}</td>
+                  <td>{e.status ? "ACTIVE" : "INACTIVE"}</td>
+                  <td>
+                    <Link
+                      to={`/dashboard/edit_employee/` + e.username}
+                      className="btn btn-primary btn-sm me-2"
+                    >
+                      Edit
+                    </Link>
+                    {e.status && (
+                      <button
+                        className={`btn ${!e.status ? 'btn-success' : 'btn-danger'} btn-sm`}
+                        // style={{ width: '80px' }}
+                        onClick={() => handleDelete(e.username)}
+                      >
+                        {e.status ? "Inactive" : "Active"}
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

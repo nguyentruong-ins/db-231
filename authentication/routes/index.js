@@ -64,7 +64,7 @@ router.post("/employee/login", async (req, res) => {
                     { expiresIn: "1d" }
                 );
                 res.cookie('token', token);
-                return res.json({ loginStatus: true, id: result.recordset[0].id });
+                return res.json({ loginStatus: true, username: result.recordset[0].username });
             } else {
                 return res.json({ loginStatus: false, Error: "Wrong username or password" });
             }

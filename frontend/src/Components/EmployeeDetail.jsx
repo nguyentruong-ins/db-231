@@ -1,26 +1,26 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { convertDataToInput } from '../utils';
 
 
 const EmployeeDetail = () => {
-    const [employee, setEmployee] = useState([])
-    const { id } = useParams()
+    const [employee, setEmployee] = useState({});
+    const { username } = useParams()
     const navigate = useNavigate()
     useEffect(() => {
-        axios.get('/sample_data/employee_accounts.json')
+        axios.post('http://localhost:4000/api/admin/employee', { username })
             .then(result => {
-                setEmployee(result.data["SELECT * FROM employee_accounts;\n"][id])
+                const employeeData = result.data.message;
+                setEmployee({
+                    ...employeeData,
+                    started_date: convertDataToInput(employeeData.started_date),
+                    dob: convertDataToInput(employeeData.dob),
+                });
             })
             .catch(err => console.log(err))
     }, [])
-    // useEffect(() => {
-    //     axios.get('http://localhost:3000/employee/detail/' + id)
-    //         .then(result => {
-    //             setEmployee(result.data[0])
-    //         })
-    //         .catch(err => console.log(err))
-    // }, [])
+
     const handleLogout = () => {
         axios.get('http://localhost:3000/auth/logout')
             .then(result => {
@@ -36,10 +36,10 @@ const EmployeeDetail = () => {
                 <h4 className='m-0'>Employee Details</h4>
             </div>
             <div className='d-flex justify-content-center flex-column align-items-center mt-3'>
-                {!employee && (
-                    <div className='m-5'>Sorry, there is no active account</div>
+                {!employee.status && (
+                    <h3 className='m-5'>Sorry, your account is inactive</h3>
                 )}
-                {!!employee && (
+                {!!employee.status && (
                     <>
                         <div className='d-flex justify-content-evenly w-100 gap-4 m-5'>
                             <div>

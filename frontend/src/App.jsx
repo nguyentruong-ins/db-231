@@ -11,6 +11,8 @@ import Home from './Components/Home'
 import Login from './Components/Login'
 import Start from './Components/Start'
 import PrivateRoute from './Components/PrivateRoute'
+import Store from './Components/Store'
+import StoreDetail from './Components/StoreDetail'
 
 function App() {
   return (
@@ -19,7 +21,7 @@ function App() {
         <Route path='/' element={<Start />}></Route>
         <Route path='/admin_login' element={<Login />}></Route>
         <Route path='/employee_login' element={<EmployeeLogin />}></Route>
-        <Route path='/employee_detail/:id' element={<EmployeeDetail />}></Route>
+        <Route path='/employee_detail/:username' element={<EmployeeDetail />}></Route>
         <Route path='/dashboard' element={
           <PrivateRoute>
             <Dashboard />
@@ -28,7 +30,9 @@ function App() {
           <Route path='' element={<Home />}></Route>
           <Route path='/dashboard/employee' element={<Employee />}></Route>
           <Route path='/dashboard/add_employee' element={<AddEmployee />}></Route>
-          <Route path='/dashboard/edit_employee/:id' element={<EditEmployee />}></Route>
+          <Route path='/dashboard/edit_employee/:username' element={<EditEmployee />}></Route>
+          <Route path='/dashboard/store' element={<Store />}></Route>
+          <Route path='/dashboard/store_detail/:id' element={<StoreDetail />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
