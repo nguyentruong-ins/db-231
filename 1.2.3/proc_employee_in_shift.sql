@@ -18,3 +18,5 @@ BEGIN
     SELECT *
     FROM EmployeesInAShift;
 END;
+
+-- EXEC GetEmployeesByShiftId 9;
