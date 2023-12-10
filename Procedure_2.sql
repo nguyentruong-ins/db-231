@@ -1,4 +1,4 @@
-CREATE PROCEDURE GetTopSellingEmployees
+CREATE OR ALTER PROCEDURE GetTopSellingEmployees
     @startDate DATETIME2,
     @endDate DATETIME2,
     @numberOfEmployees INT
@@ -6,15 +6,15 @@ AS
 BEGIN
     WITH OrderedEmployees AS (
         SELECT TOP (@numberOfEmployees)
-            ea.id AS employee_id,
-            ea.first_name,
-            ea.last_name,
-            ea.username,
+            s.id,
+			s.started_at,
+			s.ended_at,
+			s.day,
+			s."month",
+			s."year",
             SUM(oi.actual_price * oi.quantity) AS total_sales
         FROM
-            employee_accounts ea
-            JOIN employee_shifts es ON ea.username = es.username
-            JOIN shifts s ON es.shift_id = s.id
+            shifts s
             JOIN orders o ON 
 				-- Check where order is on employees' shift
 				s."month" = MONTH(o.ordered_at) 
@@ -25,8 +25,8 @@ BEGIN
         WHERE
             o.ordered_at >= @startDate AND o.ordered_at <= @endDate
         GROUP BY
-            ea.id, ea.first_name, ea.last_name, ea.username
-        ORDER BY
+			s.id, s.started_at, s.ended_at, s.day, s."month", s."year"
+		ORDER BY
             total_sales DESC
     )
 
