@@ -164,11 +164,11 @@ INSERT INTO online_orders 	(order_id, status, shipping_fee, shipping_address, pr
 INSERT INTO online_orders 	(order_id, status, shipping_fee, shipping_address, predicted_arrived_time, customer_account_username, export_employee_username, shipping_employee_username, discount_amount_by_point)
 				VALUES		(10, 'DONE', 0, '...', '11-10-2023 10:00', 'customer4', 'employee8', 'employee3', 0);
 INSERT INTO online_orders 	(order_id, status, shipping_fee, shipping_address, predicted_arrived_time, customer_account_username, export_employee_username, shipping_employee_username, discount_amount_by_point)
-				VALUES		(11, 'DONE', 0, '...', '11-10-2023 10:00', 'customer4', 'employee3', 'employee4', 0);
+				VALUES		(11, 'DONE', 0, '...', '11-10-2023 10:00', 'customer2', 'employee3', 'employee4', 0);
 INSERT INTO online_orders 	(order_id, status, shipping_fee, shipping_address, predicted_arrived_time, customer_account_username, export_employee_username, shipping_employee_username, discount_amount_by_point)
-				VALUES		(12, 'DONE', 0, '...', '11-10-2023 10:00', 'customer4', 'employee4', 'employee3', 0);
+				VALUES		(12, 'DONE', 0, '...', '11-10-2023 10:00', 'customer1', 'employee4', 'employee3', 0);
 INSERT INTO online_orders 	(order_id, status, shipping_fee, shipping_address, predicted_arrived_time, customer_account_username, export_employee_username, shipping_employee_username, discount_amount_by_point)
-				VALUES		(13, 'DONE', 0, '...', '11-10-2023 10:00', 'customer4', 'employee8', 'employee3', 0);
+				VALUES		(13, 'DONE', 0, '...', '11-10-2023 10:00', 'customer3', 'employee8', 'employee3', 0);
 
 
 -- 039_insert_directly_orders.sql
