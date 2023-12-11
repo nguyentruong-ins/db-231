@@ -1,4 +1,4 @@
-CREATE PROCEDURE GetTopCustomersWithLargestOrders
+CREATE OR ALTER PROCEDURE GetTopCustomersWithLargestOrders
     @startDate DATETIME2,
     @endDate DATETIME2,
     @numberOfCustomers INT
