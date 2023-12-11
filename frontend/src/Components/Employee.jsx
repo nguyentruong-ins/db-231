@@ -34,17 +34,19 @@ const Employee = () => {
   }, []);
 
   const handleDelete = async (username) => {
-    const shouldDelete = window.confirm('Are you sure to change status of this employee?');
-    await axios
-      .post('http://localhost:4000/api/admin/delete-employee', { username })
-      .then(result => {
-        if (result.data.statusCode === 200) {
-          window.location.reload();
-        } else {
-          alert(result.data.message);
-        }
-      })
-      .catch((err) => console.log(err));
+    const shouldDelete = window.confirm('Are you sure to deactivate this employee?');
+    if (shouldDelete) {
+      await axios
+        .post('http://localhost:4000/api/admin/delete-employee', { username })
+        .then(result => {
+          if (result.data.statusCode === 200) {
+            window.location.reload();
+          } else {
+            alert(result.data.message);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }
   return (
     <div className="px-5 mt-3">
