@@ -1,6 +1,6 @@
 -- Get Total Revenue in 1 Store in a period of time --
 
-ALTER FUNCTION dbo.GetTotalRevenue(
+CREATE OR ALTER FUNCTION dbo.GetTotalRevenue(
     @storeID INT,
     @startDate DATE,
     @endDate DATE
@@ -15,7 +15,7 @@ BEGIN
         RETURN NULL;
     END
 
-    SELECT @totalRevenue = ISNULL(SUM(o.total_amount), 0)
+    SELECT @totalRevenue = ISNULL(SUM(o.total_amount), 0) - ISNULL(SUM(o.discount_amount_by_membership),0) - ISNULL(SUM(o.discount_amount_by_voucher),0)
     FROM orders o
     WHERE o.ordered_at BETWEEN @startDate AND @endDate
         AND (
